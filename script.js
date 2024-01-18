@@ -4,10 +4,10 @@ function getComputerChoice() {
     const choices = ['Rock', 'Paper', 'Scissors'];
     const randomIndex = Math.floor(Math.random() * choices.length);
     return choices[randomIndex];
-  }
+}
   
-  // Function to play a single round
-  function playRound(playerSelection, computerSelection) {
+// Function to play a single round
+function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection === computerSelection.toLowerCase()) {
       return "It's a tie! Replay the round.";
@@ -20,7 +20,7 @@ function getComputerChoice() {
     } else {
       return `You Lose!`;
     }
-  }
+}
 function game(){
 	let playerScore = 0;
 	let computerScore = 0;
