@@ -1,39 +1,68 @@
-function getComputerChoice(){
-    var x = Math.floor(Math.random()*3);
-    switch (x) {
-        case 0:
-            return "R";break;
-        case 1:
-            return "P";break;
-        case 2:return "S";break;
-        default:return "A";break;
+
+// Function to get computer's choice
+function getComputerChoice() {
+    const choices = ['Rock', 'Paper', 'Scissors'];
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    return choices[randomIndex];
+  }
+  
+  // Function to play a single round
+  function playRound(playerSelection, computerSelection) {
+    playerSelection = playerSelection.toLowerCase();
+    if (playerSelection === computerSelection.toLowerCase()) {
+      return "It's a tie! Replay the round.";
+    } else if (
+      (playerSelection === 'rock' && computerSelection === 'Scissors') ||
+      (playerSelection === 'paper' && computerSelection === 'Rock') ||
+      (playerSelection === 'scissors' && computerSelection === 'Paper')
+    ) {
+      return `You Win!`;
+    } else {
+      return `You Lose!`;
     }
+  }
+function game(){
+	let playerScore = 0;
+	let computerScore = 0;
+
+	const div = document.querySelector('div');
+	const content = document.createElement('div');
+	const mainList = document.querySelector('ul');
+
+
+
+	const buttons = document.querySelectorAll('button');
+		buttons.forEach((button)=>{
+			button.onclick = () =>{
+				const result = playRound(button.id, getComputerChoice());
+				console.log(result);
+				content.textContent = result
+				div.appendChild(content);
+				if (result == "You Win!"){
+					playerScore++;
+				}else if(result == "You Lose!"){
+					computerScore++;
+				};
+				const currentItem = document.createElement('li');
+				const currentScore = document.createElement('span');
+				currentScore.textContent = playerScore+" / "+computerScore;
+				currentItem.appendChild(currentScore);
+				mainList.appendChild(currentItem);
+
+				if(playerScore==5 || computerScore==5){
+					document.getElementById('myList').innerHTML='';
+					if (playerScore>computerScore){
+						div.innerHTML = "You win . the game will reset!";
+					}else if(playerScore<computerScore){
+						div.innerHTML = "You lose . the game will reset!";
+					}
+
+					playerScore=0;
+					computerScore=0;
+				}
+			}
+		}
+	);
 }
-function play(x, y){
-    if((x== "R" && y== "P")||(x== "S" && y== "R")||(x== "P" && y== "S")){
-        return "ywin";
-    }else if((x== "R" && y== "S")||(x== "P" && y== "R")||(x=="S"&&y=="P")){
-        return "xwin";
-    }else {
-        return "noWin";
-    }
-}
-function game(x, y){
-    var xs=0;
-    var ys=0;
-    while (xs<3 && ys<3) {
-        console.log("Yal3eb jalel");
-        var ch=play(x, y);
-        if(ch=="xwin"){xs++;}
-        else if(ch=="ywin"){ys++;}
-        else{xs++;ys++;}
-    }
-    if (xs==3){
-        console.log("Moi Rbe7t");
-    }else{
-        console.log("Pc ta3 ze** rbe7");
-    }
-}
-const x=prompt("Donner votre choix ==> R P S").toUpperCase();
-const y=getComputerChoice();
-game(x, y);
+// Start the game
+game();
