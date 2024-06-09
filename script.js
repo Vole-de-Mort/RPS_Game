@@ -66,3 +66,15 @@ function game(){
 }
 // Start the game
 game();
+// visualisation du keyboard navigation 
+
+function nameAlert(e){
+	if (e.type == 'click' || e.type == ' ' || e.type == 'Enter'){
+		alert(e.target.textContent);
+	}
+}
+const btns = document.querySelectorAll('button');
+btns.forEach(button =>{
+	button.addEventListener('click', nameAlert);
+	button.addEventListener('keydown', nameAlert);
+})
